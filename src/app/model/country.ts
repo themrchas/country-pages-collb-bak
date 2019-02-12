@@ -3,11 +3,11 @@ import * as moment from 'moment';
 export class Country {
 
     constructor(
-        private title: string,
-        private countryCode: string,
-        private region: string,
-        private population: number,
-        private flagUrl: string) {}
+        title: string,
+        countryCode: string,
+        public region: string,
+        population: number,
+        flagUrl: string) {}
 }
 
 export function createCountryFromSharePointResult(result: any) {

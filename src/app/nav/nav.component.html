@@ -14,19 +14,28 @@
     </a>
   </div>
 
+  
+
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
     <ul class="nav navbar-nav" *ngFor="let leftMenu of leftMenus">
         <li class="dropdown" [ngClass]="{'mega-menu': leftMenu.menuType === 'megaMenu'}">
           <a [attr.data-toggle]="navbarCollapsed ? 'dropdown' : null" [attr.href]="leftMenu.url && !navbarCollapsed ? leftMenu.url : null" role="button" aria-haspopup="true" aria-expanded="false">{{leftMenu.title}}</a>
           <ul class="dropdown-menu">
               <div class="row">
                   <div class="col-sm-6">
-                    <div class="menu-section"><a class="menu-header" routerLink="/country/deu" routerLinkActive="active">Germany</a></div>
-                    <div class="menu-section"><a class="menu-header" routerLink="/country/gha" routerLinkActive="active">Country 2</a></div>
-                  </div>
+                    <div *ngFor="let country of (countries | groupCountriesByRegion:'EA') | async">
+                        <div class="menu-section">
+                            <a class="menu-header" routerLink="{{country.countryCode}}" routerLinkActive="active">{{country.title}}</a>
+                          </div>
+                    </div>
+                 <!--   <div class="menu-section"><a class="menu-header" routerLink="/country/deu" routerLinkActive="active">Germany</a></div>
+                    <div class="menu-section"><a class="menu-header" routerLink="/country/gha" routerLinkActive="active">Country 2</a></div> -->
+                  </div> 
+
                   <div class="col-sm-6">
-                    <div class="menu-section"><a class="menu-header" routerLink="/country/gib" routerLinkActive="active">Country 3</a></div>
-                    <div class="menu-section"><a class="menu-header" routerLink="/country/grc" routerLinkActive="active">Country 4</a></div>
+                 <!--   <div class="menu-section"><a class="menu-header" routerLink="/country/gib" routerLinkActive="active">Country 3</a></div>
+                    <div class="menu-section"><a class="menu-header" routerLink="/country/grc" routerLinkActive="active">Country 4</a></div> -->
                   </div>
                 </div>
           </ul>

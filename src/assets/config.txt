@@ -1,7 +1,7 @@
 {
         "env": "low",
         "country": {
-            "webURL": "http://localhost:8080/sites/socafdev",
+            "webURL": "http://localhost:8080/sites/dev/socafdev",
             "listName": "CountryData"
         },
         "userWebURL": "http://localhost:8080/sites/socaf/homepage-integration",

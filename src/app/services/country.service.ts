@@ -16,9 +16,9 @@ export class CountryService {
     const filter = `Country_x0020_Code eq '${countryCode.toUpperCase()}'`;
     return this.spListService.getListItems(ConfigProvider.settings.country.webURL,
       ConfigProvider.settings.country.listName, null, filter, 1).pipe(map(resp => {
-        console.log(resp);
+        console.log('getCountry response is',resp);
         const respArray = createCountryArrayFromSharePointResponse(resp);
-        console.log(respArray);
+        console.log('response in array format is',respArray);
         return respArray.length > 0 ? respArray[0] : null;
       }));
   }

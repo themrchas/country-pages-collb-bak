@@ -18,6 +18,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SelectCountryComponent } from './select-country/select-country.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 
+
+import { GroupCountriesByRegionPipe } from './pipes/groupByRegions';
+
 const appRoutes: Routes = [
   { path: 'home', component: SelectCountryComponent },
   {
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavComponent,
     PageNotFoundComponent,
-    SelectCountryComponent
+    SelectCountryComponent,
+    GroupCountriesByRegionPipe
   ],
   imports: [
     DashboardModule,
