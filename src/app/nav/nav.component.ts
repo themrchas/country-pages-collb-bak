@@ -34,17 +34,21 @@ export class NavComponent implements OnInit {
     // TODO: Remove this and dynamically generate these (see next TODO)
     this.leftMenus = this.navConfig.leftMenus;
 
+     this.countries = this.countryService.getCountries();
+
     // TODO: retrieve countries from the list, possibly grouped by Region?
     // Not sure is the REST API supports grouping, especially if the Region column is a Managed Metadata column
-    this.countryService.getCountries().subscribe({
-      next(countries)   { this.countries = from(countries) ; console.log('Countries in nav.components are',this.countries);} 
+
+  //  this.countryService.getCountries().subscribe({
+  //    next(countries)   { this.countries = from(countries) ; console.log('Countries in nav.components are',this.countries);} 
         // next(countries)   { this.countries = countries ; console.log('Countries in nav.components are',this.countries);}
+
          // complete() { console.log('subscribe to countries', this.countries); }
          //  console.log(countries);
        //  function(countries) { this.countries = countries; console.log(this.countries);}
       // next: {this.countries = countries; console.log(this.countries); }
      
-    });
+   // });
 
     this.adjustNavbarMenus();
 
