@@ -3,14 +3,15 @@ import * as moment from 'moment';
 export class Country {
 
     constructor(
-        title: string,
-        countryCode: string,
+        public title: string,
+        public countryCode: string,
         public region: string,
-        population: number,
-        flagUrl: string) {}
+        public population: number,
+        public flagUrl: string) {}
 }
 
 export function createCountryFromSharePointResult(result: any) {
+    console.log('createCountryFromSharePointResult mapping:',result);
     return new Country(
         result.Title,
         result.Country_x0020_Code,
@@ -27,6 +28,6 @@ export function createCountryArrayFromSharePointResponse(resp) {
         console.error('Unable to retrieve countries from SP response');
         retVal = new Array<Country>();
     }
-
+    console.log('country.ts created country array is', retVal);
     return retVal;
 }

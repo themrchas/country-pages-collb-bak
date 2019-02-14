@@ -24,19 +24,25 @@
           <ul class="dropdown-menu">
               <div class="row">
                   <div class="col-sm-6">
-                    <div *ngFor="let country of (countries | groupCountriesByRegion:'EA') | async">
-                        <div class="menu-section">
-                            <a class="menu-header" routerLink="{{country.countryCode}}" routerLinkActive="active">{{country.title}}</a>
-                          </div>
-                    </div>
+                   <!-- <div *ngFor="let country of (countries | groupCountriesByRegion:'EA') | async"> -->
+                     <!-- <div *ngFor="let country of filterCountries('EA') | async"> -->
+
+                        <div class="menu-section"><a class="menu-header" routerLink="/country/gib" routerLinkActive="active">countries: {{countries}}</a></div>
+                        <div *ngFor="let country of countries | async">
+                          
+                            <div class="menu-section">
+                               <a class="menu-header" routerLink="{{country.countryCode}}" routerLinkActive="active">blah: {{country.title}}</a> 
+                            </div>
+                         </div>
                  <!--   <div class="menu-section"><a class="menu-header" routerLink="/country/deu" routerLinkActive="active">Germany</a></div>
                     <div class="menu-section"><a class="menu-header" routerLink="/country/gha" routerLinkActive="active">Country 2</a></div> -->
                   </div> 
 
                   <div class="col-sm-6">
-                 <!--   <div class="menu-section"><a class="menu-header" routerLink="/country/gib" routerLinkActive="active">Country 3</a></div>
-                    <div class="menu-section"><a class="menu-header" routerLink="/country/grc" routerLinkActive="active">Country 4</a></div> -->
+                   <div class="menu-section"><a class="menu-header" routerLink="/country/gib" routerLinkActive="active">Country 3</a></div>
+                    <div class="menu-section"><a class="menu-header" routerLink="/country/grc" routerLinkActive="active">Country 4</a></div> 
                   </div>
+
                 </div>
           </ul>
         </li>
@@ -45,3 +51,11 @@
   </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+<div *ngFor="let country of countries | async">
+   Hello World:  {{country}}
+  
+     <!-- <a class="menu-header" routerLink="{{country.countryCode}}" routerLinkActive="active">{{country.title}}</a> -->
+    
+</div>

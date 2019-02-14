@@ -24,7 +24,7 @@ export class SpListService {
       reqUrl += order || filter ? '&' : '';
       reqUrl += '&$top=' + rowLimit;
     }
-
+    console.log('sp-list.service query',reqUrl, ConfigProvider.spGetHttpOptions());
     return this.httpClient.get(reqUrl, ConfigProvider.spGetHttpOptions());
   }
 

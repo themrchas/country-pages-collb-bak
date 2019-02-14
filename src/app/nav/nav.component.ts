@@ -3,6 +3,8 @@ import { ConfigProvider } from '../providers/configProvider';
 import { CountryService } from '../services/country.service';
 import { Country } from '../model/country';
 
+import { Observable, from } from 'rxjs';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -14,7 +16,14 @@ export class NavComponent implements OnInit {
   leftMenus: Array<any>;
   navbarCollapsed: boolean;
   env: string;
-  countries: Array<Country>;
+  countries: Observable<Array<Country>>;
+
+  obCountries: Observable<Array<Country>>;
+
+ // filterCountries(region: string) {
+ //   console.log('executing filterCountries with',region);
+ //   return this.countries.filter(country => country.region == "EA");
+ // }
 
   constructor(private countryService: CountryService) { }
 
@@ -28,8 +37,9 @@ export class NavComponent implements OnInit {
     // TODO: retrieve countries from the list, possibly grouped by Region?
     // Not sure is the REST API supports grouping, especially if the Region column is a Managed Metadata column
     this.countryService.getCountries().subscribe({
-          next(countries)   { this.countries = countries ; console.log('Countries are',this.countries);},
-        //  complete() { console.log(this.countries); }
+      next(countries)   { this.countries = from(countries) ; console.log('Countries in nav.components are',this.countries);} 
+        // next(countries)   { this.countries = countries ; console.log('Countries in nav.components are',this.countries);}
+         // complete() { console.log('subscribe to countries', this.countries); }
          //  console.log(countries);
        //  function(countries) { this.countries = countries; console.log(this.countries);}
       // next: {this.countries = countries; console.log(this.countries); }
