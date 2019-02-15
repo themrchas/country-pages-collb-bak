@@ -3,7 +3,7 @@ import { ConfigProvider } from '../providers/configProvider';
 import { CountryService } from '../services/country.service';
 import { Country } from '../model/country';
 
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -16,9 +16,22 @@ export class NavComponent implements OnInit {
   leftMenus: Array<any>;
   navbarCollapsed: boolean;
   env: string;
-  countries: Observable<Array<Country>>;
 
-  obCountries: Observable<Array<Country>>;
+ // countries: Observable<Array<Country>>;
+countries: Array<Country>;
+
+obCountries: Observable<Array<Country>>;
+
+countriesEA:  Observable<Array<Country>>;
+
+countriesNWA: Observable<Array<Country>>;
+
+
+private groupCountries(countries: Country[],region: string): Observable<Array<Country>> {
+
+      return of(countries.filter(el => el.region == region)); 
+}
+
 
  // filterCountries(region: string) {
  //   console.log('executing filterCountries with',region);
@@ -34,13 +47,26 @@ export class NavComponent implements OnInit {
     // TODO: Remove this and dynamically generate these (see next TODO)
     this.leftMenus = this.navConfig.leftMenus;
 
+   /* Works!!
      this.countries = this.countryService.getCountries();
+    */
 
     // TODO: retrieve countries from the list, possibly grouped by Region?
     // Not sure is the REST API supports grouping, especially if the Region column is a Managed Metadata column
 
-  //  this.countryService.getCountries().subscribe({
-  //    next(countries)   { this.countries = from(countries) ; console.log('Countries in nav.components are',this.countries);} 
+    this.countryService.getCountries().subscribe({
+     next: obsValue =>  { console.log('observable returned', obsValue); 
+                          obsValue.forEach(el => console.log('Country is',el.title));
+                          this.obCountries = of(obsValue);
+                          console.log('packaged obCountries is', this.obCountries);
+
+                          this.countriesEA = this.groupCountries(obsValue,'EA');
+                          this.countriesNWA = this.groupCountries(obsValue,'NWA');
+                          
+
+
+                         // console.log('Countries in nav.components are')
+                        } 
         // next(countries)   { this.countries = countries ; console.log('Countries in nav.components are',this.countries);}
 
          // complete() { console.log('subscribe to countries', this.countries); }
@@ -48,7 +74,7 @@ export class NavComponent implements OnInit {
        //  function(countries) { this.countries = countries; console.log(this.countries);}
       // next: {this.countries = countries; console.log(this.countries); }
      
-   // });
+   });
 
     this.adjustNavbarMenus();
 
